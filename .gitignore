@@ -1,0 +1,16 @@
+.env
+# Build results
+*.exe
+*.obj
+*.pdb
+*.dll
+*.log
+
+# Visual Studio files
+.vs/
+*.vcxproj.user
+
+# Binaries
+x64/
+Debug/
+Release/
