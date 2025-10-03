@@ -3,12 +3,47 @@
 #include <iostream> // standard c++ IO
 #include <libpq-fe.h> // postgresql c client library (APIs)
 #include <cstdlib>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-// Removed for security reasons
+
+    string PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE;
+    ifstream inputFile(".env");
+
+    if (!inputFile.is_open()) {
+        cerr << "Error : Could not open the file!" << endl;
+        return 1;
+    }
+
+    string line;
+    while (getline(inputFile, line)) {
+        size_t found = line.find('=');
+        if (found != string::npos) {
+            string key = line.substr(0, found);
+            string value = line.substr(found + 1);
+
+            if (key == "PGUSER") PGUSER = value;
+            else if (key == "PGPASSWORD") PGPASSWORD = value;
+            else if (key == "PGHOST") PGHOST = value;
+            else if (key == "PGPORT") PGPORT = value;
+            else if (key == "PGDATABASE") PGDATABASE = value;
+        }
+        
+    }
+    inputFile.close();
+
+    string conninfo =
+        "user=" + PGUSER +
+        " password=" + PGPASSWORD +
+        " host=" + PGHOST +
+        " port=" + PGPORT +
+        " dbname=" + PGDATABASE;
+
+    PGconn* conn = PQconnectdb(conninfo.c_str());    
     // PGconn* conn -- declares a pointer representing the connection state
 
    /* 
@@ -61,7 +96,7 @@ int main()
         cout << endl;
     }
 
-    res = PQexec(conn, "INSERT INTO customer (name,address,phone) VALUES ('erica','state road prov4','340-233-9089');");
+   // res = PQexec(conn, "INSERT INTO customer (name,address,phone) VALUES ('jomauris','state road prov4','340-233-9089');");
 
     PQclear(res);
     PQfinish(conn); // Close the connection
