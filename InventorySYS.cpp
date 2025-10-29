@@ -1,11 +1,10 @@
 // InventorySYS.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream> // standard c++ IO
-#include <libpq-fe.h> // postgresql c client library (APIs)
 #include <cstdlib>
 #include <fstream>
 #include <string>
-
+#include "db.h"
 using namespace std;
 
 int main()
@@ -29,64 +28,56 @@ int main()
     }
     inputFile.close();
 
+    auto conn = connectToDB(conninfo);    
+    if (!conn) return 1;
 
-    PGconn* conn = PQconnectdb(conninfo.c_str());    
-    // PGconn* conn -- declares a pointer representing the connection state
+    int choice = 0;
 
-   /* 
-   PQconnectb -- attempts to connect PostgreSQL using a connection string.That function :
-   * Parse the connection string.
-   * Opens a socket to the host:port
-   * Runs the PostgreSQL authentication handshake (password,etc.)
-   * Returns a PGconn * object which represents the connection (even if connection failed - you must check the status).
-   */
+    while (choice != 4) {
+        std::cout << "1. View all customers\n2. Add a customer.\n3. Delete a customer\n4. Exit\n";
+    std::cin >> choice;
 
-
-    if (PQstatus(conn) != CONNECTION_OK) {
-        cerr << "Connection to database failed: " << PQerrorMessage(conn) << endl;
-        PQfinish(conn);
-        return 1;
-    }
-    /*
-    PQstatus(conn) - returns the connection status
-    CONNECTION_OK means success. Any other value means the connection didn't succeed.
-    PQerrorMessage(conn) — returns a textual error message with details from libpq/Postgres.
-    std::cerr << ... — prints the error.
-    PQfinish(conn) — closes and frees the PGconn object (important cleanup even on failure).
-    return 1; — exit with non-zero status to indicate error.
-    */
-
-
-
-    cout << "Connected to PostgreSQL successfully!" << endl;
-    // Perform database operations here
-
-    PGresult* res = PQexec(conn, "SELECT * FROM customer;");
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        cerr << "SELECT failed:" << PQerrorMessage(conn) << endl;
-        cout << res << endl;
-        PQclear(res);
-        PQfinish(conn);
-        return 1;
-    }
-
-    cout << "SELECT ran successfully!" << endl;
-
-    // Loop through results
-    int rows = PQntuples(res);
-    int cols = PQnfields(res);
-
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            cout << PQgetvalue(res,i, j) << " ";
+        switch (choice) {
+        case 1: {
+              viewCustomers(conn);
+              break;
         }
-        cout << endl;
+        case 2: {
+            std::string name, address, phone;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // flush leftover newline
+            std::cout << "Name: ";
+            std::getline(std::cin, name);
+
+            std::cout << "Address: ";
+            std::getline(std::cin, address);
+
+            std::cout << "Phone: ";
+            std::getline(std::cin, phone);
+
+            addCustomer(conn, name, address, phone);
+            break;
+        }
+        case 3: {
+            int customerId;
+            std::cout << "customerId: "; std::cin >> customerId;
+            deleteCustomer(conn, customerId);
+            break;
+        }
+        case 4: {
+            std::cout << "Exiting...\n";
+            break;
+        }
+        default: {
+            std::cout << "Invalid choice\n";
+        }
+        }
     }
 
-   // res = PQexec(conn, "INSERT INTO customer (name,address,phone) VALUES ('jomauris','state road prov4','340-233-9089');");
 
-    PQclear(res);
-    PQfinish(conn); // Close the connection
+    //viewCustomers(conn);
+    //addCustomer(conn, "GINNY", "1234 park DV", "757-677-0098");
+    //deleteCustomer(conn, 15);
+    closeConnection(conn);
     return 0;
 }
 
