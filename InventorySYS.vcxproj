@@ -126,11 +126,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="db.cpp" />
     <ClCompile Include="InventorySYS.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".env" />
     <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="db.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

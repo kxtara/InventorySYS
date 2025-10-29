@@ -18,9 +18,17 @@
     <ClCompile Include="InventorySYS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".env" />
     <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
