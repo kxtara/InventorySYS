@@ -10,38 +10,25 @@ using namespace std;
 
 int main()
 {
-
-    string PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE;
-    ifstream inputFile(".env");
+    ifstream inputFile(".env"); // open .env file
 
     if (!inputFile.is_open()) {
         cerr << "Error : Could not open the file!" << endl;
         return 1;
     }
-
+    string conninfo;
     string line;
+
     while (getline(inputFile, line)) {
+        // read line-by-line
         size_t found = line.find('=');
         if (found != string::npos) {
-            string key = line.substr(0, found);
-            string value = line.substr(found + 1);
-
-            if (key == "PGUSER") PGUSER = value;
-            else if (key == "PGPASSWORD") PGPASSWORD = value;
-            else if (key == "PGHOST") PGHOST = value;
-            else if (key == "PGPORT") PGPORT = value;
-            else if (key == "PGDATABASE") PGDATABASE = value;
+            conninfo = line.substr(found + 1);
         }
         
     }
     inputFile.close();
 
-    string conninfo =
-        "user=" + PGUSER +
-        " password=" + PGPASSWORD +
-        " host=" + PGHOST +
-        " port=" + PGPORT +
-        " dbname=" + PGDATABASE;
 
     PGconn* conn = PQconnectdb(conninfo.c_str());    
     // PGconn* conn -- declares a pointer representing the connection state

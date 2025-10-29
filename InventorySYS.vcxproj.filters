@@ -23,9 +23,4 @@
     <None Include=".env" />
     <None Include=".gitignore" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="test.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>
