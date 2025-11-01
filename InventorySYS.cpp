@@ -32,7 +32,7 @@ int main()
     if (!conn) return 1;
 
     int choice = 0;
-
+     // This has an error, after choosing multiple options it prints out infinitely 
     while (choice != 4) {
         std::cout << "1. View all customers\n2. Add a customer.\n3. Delete a customer\n4. Exit\n";
     std::cin >> choice;
@@ -59,6 +59,7 @@ int main()
         }
         case 3: {
             int customerId;
+            // infinite loop???
             std::cout << "customerId: "; std::cin >> customerId;
             deleteCustomer(conn, customerId);
             break;
@@ -72,6 +73,7 @@ int main()
         }
         }
     }
+
 
 
     //viewCustomers(conn);
