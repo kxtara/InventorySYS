@@ -14,19 +14,30 @@ std::string static categoryToString(CategoryProd category) {
     return "Food"; // default fallback
 }
 
+// this function works
 void viewProducts(PGconn* conn) {
 	runQuery(conn, "SELECT * FROM product;");
 };
-void addProduct(PGconn* conn, std::string& name, std::string& description, int quantity, double price, CategoryProd category) {
+
+// this function works
+void addProduct(PGconn* conn, const std::string& name, const std::string& description,
+    int quantity, double price, CategoryProd category,
+    int supplierId)
+{
     std::string categoryStr = categoryToString(category);
-    std::string query = "INSERT INTO product (name, description, quantity, price, category) VALUES ('"
+    std::string query =
+        "INSERT INTO product (name, description, quantity, price, category, \"supplierId\") VALUES ('"
         + name + "', '"
         + description + "', "
         + std::to_string(quantity) + ", "
-        + std::to_string(price) + ", "
-        + categoryStr + ");";
-	runQuery(conn,query);
-};
+        + std::to_string(price) + ", '"
+        + categoryStr + "', "
+        + std::to_string(supplierId) + ");";
+
+    runQuery(conn, query);
+} 
+
+// -- test --
 
 //supplier -- values from run query needs to take different types
 void updateProduct(PGconn* conn, int productId) {
@@ -42,3 +53,5 @@ void deleteProduct(PGconn* conn, int productId) {
     std::string query = "DELETE FROM product WHERE id='" + std::to_string(productId) + "';";
     runQuery(conn, query);
 };
+
+// -- test --
