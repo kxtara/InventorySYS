@@ -35,6 +35,7 @@ void addProduct(PGconn* conn, const std::string& name, const std::string& descri
         + std::to_string(supplierId) + ");";
 
     runQuery(conn, query);
+    // testing git author
 } 
 
 // -- test --
