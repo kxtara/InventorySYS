@@ -5,6 +5,8 @@
 #include <fstream>
 #include <string>
 #include "db.h"
+#include "supplier.h"
+#include "product.h"
 using namespace std;
 
 int main()
@@ -33,7 +35,7 @@ int main()
 
     int choice = 0;
      // This has an error, after choosing multiple options it prints out infinitely 
-    while (choice != 4) {
+    /*while (choice != 4) {
         std::cout << "1. View all customers\n2. Add a customer.\n3. Delete a customer\n4. Exit\n";
     std::cin >> choice;
 
@@ -72,9 +74,17 @@ int main()
             std::cout << "Invalid choice\n";
         }
         }
-    }
+    }*/
 
 
+    /*addSupplier(conn, "Apple", "340-227-8900", "GregAbbot@apple.com");
+    cout << "Now view all Suppliers: \n" << endl ;
+    viewSuppliers(conn);*/
+
+    cout << "Add Product:" << endl;
+    addProduct(conn, "iPhone XR", "Brand new - Black - 64GB", 2, 349.99, ELECTRONICS, 1);
+    cout << "Now view all Products: \n" << endl;
+    viewProducts(conn);
 
     //viewCustomers(conn);
     //addCustomer(conn, "GINNY", "1234 park DV", "757-677-0098");

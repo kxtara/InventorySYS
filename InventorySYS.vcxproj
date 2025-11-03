@@ -129,6 +129,7 @@
     <ClCompile Include="db.cpp" />
     <ClCompile Include="InventorySYS.cpp" />
     <ClCompile Include="product.cpp" />
+    <ClCompile Include="supplier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".env" />
@@ -138,6 +139,7 @@
     <ClInclude Include="category.h" />
     <ClInclude Include="db.h" />
     <ClInclude Include="product.h" />
+    <ClInclude Include="supplier.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
