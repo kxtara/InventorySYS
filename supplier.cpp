@@ -15,3 +15,18 @@ void addSupplier(PGconn* conn, const std::string& suppliername, const std::strin
 
     runQuery(conn, query);
 };
+
+
+/* --test
+update product - take in column values to make changes
+supplier -- values from run query needs to take different types -
+*/
+void updateSupplier(PGconn * conn, int supplierId) {
+    std::string query = "UPDATE product WHERE id='" + std::to_string(supplierId) + "' SET email=testing;";
+    runQuery(conn, query);
+};
+
+static void deleteSupplier(PGconn* conn, int supplierId) {
+    std::string query = "DELETE FROM product WHERE id='" + std::to_string(supplierId) + "';";
+    runQuery(conn, query);
+};
