@@ -81,10 +81,10 @@ int main()
     cout << "Now view all Suppliers: \n" << endl ;
     viewSuppliers(conn);*/
 
-    cout << "Add Product:" << endl;
-    addProduct(conn, "iPhone XR", "Brand new - Black - 64GB", 2, 349.99, ELECTRONICS, 1);
-    cout << "Now view all Products: \n" << endl;
-    viewProducts(conn);
+    cout << "Delete product by id:" << endl;
+    deleteProduct(conn,1);
+    /*cout << "Now view all Products: \n" << endl;
+    viewProducts(conn);*/
 
     //viewCustomers(conn);
     //addCustomer(conn, "GINNY", "1234 park DV", "757-677-0098");

@@ -38,13 +38,16 @@ void addProduct(PGconn* conn, const std::string& name, const std::string& descri
     // testing git author
 } 
 
-// -- test --
-
-//supplier -- values from run query needs to take different types
+/* --test--
+update product - take in column values to make changes
+supplier -- values from run query needs to take different types -
+*/
 void updateProduct(PGconn* conn, int productId) {
     std::string query = "UPDATE product WHERE id='" + std::to_string(productId) + "' SET description=testing;";
     runQuery(conn, query);
 };
+
+// the functions below work
 void viewProductCategory(PGconn* conn, CategoryProd category) {
     std::string categoryStr = categoryToString(category);
     std::string query = "SELECT * FROM product WHERE category='" + categoryStr + "';";
@@ -54,5 +57,3 @@ void deleteProduct(PGconn* conn, int productId) {
     std::string query = "DELETE FROM product WHERE id='" + std::to_string(productId) + "';";
     runQuery(conn, query);
 };
-
-// -- test --
