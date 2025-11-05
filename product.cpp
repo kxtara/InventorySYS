@@ -1,6 +1,7 @@
 #include "db.h"  //run query function
 #include "product.h"
 #include <iostream>
+#include <unordered_set>
 
 // Might create diff runQuery function - 
 // Testing not completed
@@ -42,9 +43,19 @@ void addProduct(PGconn* conn, const std::string& name, const std::string& descri
 update product - take in column values to make changes
 supplier -- values from run query needs to take different types -
 */
-void updateProduct(PGconn* conn, int productId) {
-    std::string query = "UPDATE product WHERE id='" + std::to_string(productId) + "' SET description=testing;";
-    runQuery(conn, query);
+void updateProduct(PGconn* conn, int productId, const std::string& column, const std::string& value) {
+    static const std::unordered_set<std::string> validColumns = {
+        "name", "description","quantity","price","category","suppierId"
+    };
+        if (validColumns.count(column)) {
+            std::string query = "UPDATE product SET " + column + " = '" + value + "' WHERE id = " + std::to_string(productId) + ";";
+            runQuery(conn, query);
+
+        }
+    else {
+        std::cerr << "Invalid column name: " << column << std::endl;
+
+    }
 };
 
 // the functions below work
