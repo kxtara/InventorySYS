@@ -1,11 +1,9 @@
-#include "db.h"  //run query function
+#include "db.h"
 #include "product.h"
 #include <iostream>
 #include <unordered_set>
 
-// Might create diff runQuery function - 
-// Testing not completed
-
+// Testing completed*
 std::string static categoryToString(CategoryProd category) {
     switch (category) {
     case CategoryProd::FOOD: return "Food";
@@ -15,12 +13,9 @@ std::string static categoryToString(CategoryProd category) {
     return "Food"; // default fallback
 }
 
-// this function works
 void viewProducts(PGconn* conn) {
 	runQuery(conn, "SELECT * FROM product;");
 };
-
-// this function works
 void addProduct(PGconn* conn, const std::string& name, const std::string& description,
     int quantity, double price, CategoryProd category,
     int supplierId)
@@ -38,11 +33,6 @@ void addProduct(PGconn* conn, const std::string& name, const std::string& descri
     runQuery(conn, query);
     // testing git author
 } 
-
-/* --test--
-update product - take in column values to make changes
-supplier -- values from run query needs to take different types -
-*/
 void updateProduct(PGconn* conn, int productId, const std::string& column, const std::string& value) {
     static const std::unordered_set<std::string> validColumns = {
         "name", "description","quantity","price","category","suppierId"
@@ -50,15 +40,12 @@ void updateProduct(PGconn* conn, int productId, const std::string& column, const
         if (validColumns.count(column)) {
             std::string query = "UPDATE product SET " + column + " = '" + value + "' WHERE id = " + std::to_string(productId) + ";";
             runQuery(conn, query);
-
         }
     else {
         std::cerr << "Invalid column name: " << column << std::endl;
 
     }
 };
-
-// the functions below work
 void viewProductCategory(PGconn* conn, CategoryProd category) {
     std::string categoryStr = categoryToString(category);
     std::string query = "SELECT * FROM product WHERE category='" + categoryStr + "';";

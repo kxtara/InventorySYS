@@ -77,12 +77,15 @@ int main()
     }*/
 
 
-    /*addSupplier(conn, "Apple", "340-227-8900", "GregAbbot@apple.com");
-    cout << "Now view all Suppliers: \n" << endl ;
-    viewSuppliers(conn);*/
+    //addProduct(conn, "iPhone XR 64GB", "Fairly used black iPhone XR 64GB with minor scratches.",1,349.99,ELECTRONICS,1);
+    /*cout << "View all Suppliers: \n" << endl ;
+    viewSuppliers(conn);
+    cout << "Update supplier\n" << endl;
+    updateSupplier(conn,4,"email","Foodincoporation@foodinc.com");*/
+    deleteSupplier(conn,4);
 
-    cout << "Delete product by id:" << endl;
-    deleteProduct(conn,1);
+   /* cout << "Delete product by id:" << endl;
+    deleteProduct(conn,1);*/
     /*cout << "Now view all Products: \n" << endl;
     viewProducts(conn);*/
 
