@@ -1,4 +1,7 @@
 .env
+.vscode
+InventorySYS
+InventorySYS.dSYM
 # Build results
 *.exe
 *.obj

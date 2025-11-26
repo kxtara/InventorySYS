@@ -82,17 +82,20 @@ int main()
     viewSuppliers(conn);
     cout << "Update supplier\n" << endl;
     updateSupplier(conn,4,"email","Foodincoporation@foodinc.com");*/
-    deleteSupplier(conn,4);
+    // deleteSupplier(conn,4);
 
    /* cout << "Delete product by id:" << endl;
     deleteProduct(conn,1);*/
     /*cout << "Now view all Products: \n" << endl;
     viewProducts(conn);*/
 
-    //viewCustomers(conn);
+    viewCustomers(conn);
     //addCustomer(conn, "GINNY", "1234 park DV", "757-677-0098");
     //deleteCustomer(conn, 15);
     closeConnection(conn);
+
+    //Add explicit flush to ensure output appears before exit
+    cout.flush();
     return 0;
 }
 
