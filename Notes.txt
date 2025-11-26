@@ -1,0 +1,4 @@
+- Test customer CRUD operations in db.cpp/h
+- Start on orders CRUD operations
+- Validate email & phone inputs from supplier & customer
+- 
