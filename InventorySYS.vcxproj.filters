@@ -45,5 +45,11 @@
     <ClInclude Include="supplier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="orders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Notes.txt" />
   </ItemGroup>
 </Project>

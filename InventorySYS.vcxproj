@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="category.h" />
     <ClInclude Include="db.h" />
+    <ClInclude Include="orders.h" />
     <ClInclude Include="product.h" />
     <ClInclude Include="supplier.h" />
   </ItemGroup>

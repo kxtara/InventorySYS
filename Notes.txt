@@ -1,4 +1,4 @@
-- Restore the Database Schema
+- Restore the Database Schema (connect mac to window for shared db)
 - Test customer CRUD operations in db.cpp/h
 - Start on orders CRUD operations
 - Validate email & phone inputs from supplier & customer
